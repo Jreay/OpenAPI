@@ -1,2 +1,2 @@
-# Repositorio para el codigo generado
+# Repositorio para validar el codigo con el contrato OpenAPI
 

@@ -1,0 +1,35 @@
+{
+  "name": "movimientos-api",
+  "version": "1.0.0",
+  "description": "API de Gestión de Movimientos",
+  "homepage": "https://github.com/Jreay/OpenAPI#readme",
+  "bugs": {
+    "url": "https://github.com/Jreay/OpenAPI/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jreay/OpenAPI.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "ioredis": "^5.6.1",
+    "redis": "^5.1.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
+    "winston": "^3.8.2",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
