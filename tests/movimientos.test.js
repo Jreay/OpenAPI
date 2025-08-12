@@ -2,6 +2,12 @@ const request = require('supertest');
 const app = require('../src/app');
 const MovimientosService = require('../src/services/movimientosService');
 
+jest.mock('../src/models/redisClient', () => ({
+  exists: jest.fn(),
+  lrange: jest.fn(),
+  hgetall: jest.fn(),
+}));
+
 jest.mock('../src/services/movimientosService');
 
 describe('Pruebas con mock para MovimientosController', () => {
@@ -25,7 +31,7 @@ describe('Pruebas con mock para MovimientosController', () => {
 
     const response = await request(app)
       .get('/api/movimientos/ahorro')
-      .set('x-numero-cuenta', 'AHO-123456');
+      .set('x_numero_cuenta', 'AHO-123456');
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockRespuesta);
