@@ -42,11 +42,19 @@ const handleServiceError = (error, res) => {
  *                 tipo: "CREDITO"
  *                 referencia: "DEP-001..."
  */
+<<<<<<< HEAD
 router.get("/ahorro", 
   validateHeaders(["x_numero_cuenta"]),
   async (req, res, next) => {
     try {
       const numeroCuenta = req.headers["x_numero_cuenta"];
+=======
+router.get('/ahorro', 
+  validateHeaders(['x_numero_cuenta']),
+  async (req, res, next) => {
+    try {
+      const numeroCuenta = req.headers['x_numero_cuenta'];
+>>>>>>> e0d8c87edc536faf0af05f7fcce1976aba480805
       const movimientos = await MovimientosService.getMovimientosAhorro(numeroCuenta);
       res.json(movimientos);
     } catch (error) {
@@ -81,11 +89,19 @@ router.get("/ahorro",
  *                 tipo: "DEBITO"
  *                 referencia: "PAGO-002..."
  */
+<<<<<<< HEAD
 router.get("/corriente", 
   validateHeaders(["x_numero_cuenta"]),
   async (req, res, next) => {
     try {
       const numeroCuenta = req.headers["x_numero_cuenta"];
+=======
+router.get('/corriente', 
+  validateHeaders(['x_numero_cuenta']),
+  async (req, res, next) => {
+    try {
+      const numeroCuenta = req.headers['x_numero_cuenta'];
+>>>>>>> e0d8c87edc536faf0af05f7fcce1976aba480805
       const movimientos = await MovimientosService.getMovimientosCorriente(numeroCuenta);
       res.json(movimientos);
     } catch (error) {
@@ -120,11 +136,19 @@ router.get("/corriente",
  *                 tipo: "DEBITO"
  *                 referencia: "COMP-003..."
  */
+<<<<<<< HEAD
 router.get("/tarjetas", 
   validateHeaders(["x_numero_tarjeta"]),
   async (req, res, next) => {
     try {
       const numeroTarjeta = req.headers["x_numero_tarjeta"];
+=======
+router.get('/tarjetas', 
+  validateHeaders(['x_numero_tarjeta']),
+  async (req, res, next) => {
+    try {
+      const numeroTarjeta = req.headers['x_numero_tarjeta'];
+>>>>>>> e0d8c87edc536faf0af05f7fcce1976aba480805
       const movimientos = await MovimientosService.getMovimientosTarjeta(numeroTarjeta);
       res.json(movimientos);
     } catch (error) {
