@@ -1,4 +1,4 @@
-const redisClient = require('../models/redisClient');
+const redisClient = require("../models/redisClient");
 
 class MovimientosService {
   static async _getMovimientos(tipoCuenta, identificador) {
@@ -8,7 +8,7 @@ class MovimientosService {
       // Verificar existencia de la lista
       const exists = await redisClient.exists(key);
       if (!exists) {
-        throw new Error('RECURSO_NO_ENCONTRADO');
+        throw new Error("RECURSO_NO_ENCONTRADO");
       }
 
       // Obtener IDs de movimientos con paginación implícita
@@ -30,7 +30,7 @@ class MovimientosService {
             descripcion: movimiento.descripcion,
             monto: parseFloat(movimiento.monto),
             tipo: movimiento.tipo,
-            referencia: movimiento.referencia?.substring(0, 8) + '...'
+            referencia: movimiento.referencia?.substring(0, 8) + "..."
           };
         })
         .filter(Boolean);
@@ -43,23 +43,23 @@ class MovimientosService {
 
   static async getMovimientosAhorro(numeroCuenta) {
     if (!numeroCuenta?.match(/^AHO-\d{6}$/)) {
-      throw new Error('NUMERO_CUENTA_INVALIDO');
+      throw new Error("NUMERO_CUENTA_INVALIDO");
     }
-    return this._getMovimientos('ahorro', numeroCuenta);
+    return this._getMovimientos("ahorro", numeroCuenta);
   }
 
   static async getMovimientosCorriente(numeroCuenta) {
     if (!numeroCuenta?.match(/^COR-\d{6}$/)) {
-      throw new Error('NUMERO_CUENTA_INVALIDO');
+      throw new Error("NUMERO_CUENTA_INVALIDO");
     }
-    return this._getMovimientos('corriente', numeroCuenta);
+    return this._getMovimientos("corriente", numeroCuenta);
   }
 
   static async getMovimientosTarjeta(numeroTarjeta) {
     if (!numeroTarjeta?.match(/^TARJ-\d{10}$/)) {
-      throw new Error('NUMERO_TARJETA_INVALIDO');
+      throw new Error("NUMERO_TARJETA_INVALIDO");
     }
-    return this._getMovimientos('tarjeta', numeroTarjeta);
+    return this._getMovimientos("tarjeta", numeroTarjeta);
   }
 
   static _handleError(error) {
@@ -67,21 +67,21 @@ class MovimientosService {
     const errorMap = {
       RECURSO_NO_ENCONTRADO: {
         codigo: 404,
-        mensaje: 'Recurso no encontrado'
+        mensaje: "Recurso no encontrado"
       },
       NUMERO_CUENTA_INVALIDO: {
         codigo: 400,
-        mensaje: 'Número de cuenta no válido'
+        mensaje: "Número de cuenta no válido"
       },
       NUMERO_TARJETA_INVALIDO: {
         codigo: 400,
-        mensaje: 'Número de tarjeta no válido'
+        mensaje: "Número de tarjeta no válido"
       }
     };
 
     return errorMap[error.message] || { 
       codigo: 500, 
-      mensaje: 'Error interno del servidor' 
+      mensaje: "Error interno del servidor" 
     };
   }
 }

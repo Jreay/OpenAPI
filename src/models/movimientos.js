@@ -1,4 +1,4 @@
-const redisClient = require('./redisClient');
+const redisClient = require("./redisClient");
 
 class MovimientosModel {
   // Obtener movimientos por tipo de cuenta
@@ -24,7 +24,7 @@ class MovimientosModel {
       
       return movimientos;
     } catch (error) {
-      console.error('Error en getMovimientos:', error);
+      console.error("Error en getMovimientos:", error);
       throw error;
     }
   }
@@ -34,7 +34,7 @@ class MovimientosModel {
     try {
       const movimiento = await redisClient.hGetAll(`movimiento:${id}`);
       if (!movimiento || !movimiento.id) {
-        throw new Error('Movimiento no encontrado');
+        throw new Error("Movimiento no encontrado");
       }
       
       // Convertir campos numéricos
@@ -44,22 +44,22 @@ class MovimientosModel {
         saldoPosterior: parseFloat(movimiento.saldoPosterior)
       };
     } catch (error) {
-      console.error('Error en getDetalleMovimiento:', error);
+      console.error("Error en getDetalleMovimiento:", error);
       throw error;
     }
   }
 
   // Métodos específicos para cada tipo de cuenta
   static async getMovimientosAhorro(numeroCuenta) {
-    return this.getMovimientos('ahorro', numeroCuenta);
+    return this.getMovimientos("ahorro", numeroCuenta);
   }
 
   static async getMovimientosCorriente(numeroCuenta) {
-    return this.getMovimientos('corriente', numeroCuenta);
+    return this.getMovimientos("corriente", numeroCuenta);
   }
 
   static async getMovimientosTarjeta(numeroTarjeta) {
-    return this.getMovimientos('tarjeta', numeroTarjeta);
+    return this.getMovimientos("tarjeta", numeroTarjeta);
   }
 
 }

@@ -3,7 +3,11 @@ const validateHeaders = (requiredHeaders) => {
     const missingHeaders = [];
     
     requiredHeaders.forEach(header => {
-      if (!req.headers[header.toLowerCase()]) {
+      console.log(header);
+      const formattedHeader = header.toLowerCase();
+      console.log(formattedHeader);
+
+      if (!req.headers[formattedHeader]) {
         missingHeaders.push(header);
       }
     });

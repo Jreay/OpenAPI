@@ -1,22 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { validateHeaders } = require('../middlewares/validators');
-const MovimientosService = require('../services/movimientosService');
+const { validateHeaders } = require("../middlewares/validators");
+const MovimientosService = require("../services/movimientosService");
 
 // Middleware de manejo de errores reutilizable
 const handleServiceError = (error, res) => {
   const statusCode = error.code || 500;
   const errorResponse = {
     codigo: statusCode.toString(),
-    mensaje: error.message || 'Error interno del servidor',
+    mensaje: error.message || "Error interno del servidor",
     detalles: error.details || error.message,
     timestamp: new Date().toISOString()
   };
-
-  // Log adicional en desarrollo
-  if (process.env.NODE_ENV !== 'production') {
-    console.error(`[MovimientosController] ${error.message}`);
-  }
 
   return res.status(statusCode).json(errorResponse);
 };
@@ -28,15 +23,15 @@ const handleServiceError = (error, res) => {
  *     summary: Obtener movimientos de cuenta de ahorro
  *     tags: [Movimientos]
  *     parameters:
- *       - in: header
- *         name: X-Numero-Cuenta
+ *       - name: x_numero_cuenta
+ *         in: header
  *         required: true
  *         schema:
  *           type: string
- *           example: "AHO-123456"
+ *         example: AHO-123456
  *     responses:
  *       200:
- *         description: Lista de movimientos de cuenta de ahorro
+ *         description: Lista de movimientos
  *         content:
  *           application/json:
  *             example:
@@ -47,11 +42,11 @@ const handleServiceError = (error, res) => {
  *                 tipo: "CREDITO"
  *                 referencia: "DEP-001..."
  */
-router.get('/ahorro', 
-  validateHeaders(['x-numero-cuenta']),
+router.get("/ahorro", 
+  validateHeaders(["x_numero_cuenta"]),
   async (req, res, next) => {
     try {
-      const numeroCuenta = req.headers['x-numero-cuenta'];
+      const numeroCuenta = req.headers["x_numero_cuenta"];
       const movimientos = await MovimientosService.getMovimientosAhorro(numeroCuenta);
       res.json(movimientos);
     } catch (error) {
@@ -67,15 +62,15 @@ router.get('/ahorro',
  *     summary: Obtener movimientos de cuenta corriente
  *     tags: [Movimientos]
  *     parameters:
- *       - in: header
- *         name: X-Numero-Cuenta
+ *       - name: x_numero_cuenta
+ *         in: header
  *         required: true
  *         schema:
  *           type: string
- *           example: "COR-654321"
+ *         example: COR-654321
  *     responses:
  *       200:
- *         description: Lista de movimientos de cuenta corriente
+ *         description: Lista de movimientos
  *         content:
  *           application/json:
  *             example:
@@ -86,11 +81,11 @@ router.get('/ahorro',
  *                 tipo: "DEBITO"
  *                 referencia: "PAGO-002..."
  */
-router.get('/corriente', 
-  validateHeaders(['x-numero-cuenta']),
+router.get("/corriente", 
+  validateHeaders(["x_numero_cuenta"]),
   async (req, res, next) => {
     try {
-      const numeroCuenta = req.headers['x-numero-cuenta'];
+      const numeroCuenta = req.headers["x_numero_cuenta"];
       const movimientos = await MovimientosService.getMovimientosCorriente(numeroCuenta);
       res.json(movimientos);
     } catch (error) {
@@ -106,15 +101,15 @@ router.get('/corriente',
  *     summary: Obtener movimientos de tarjeta de crédito
  *     tags: [Movimientos]
  *     parameters:
- *       - in: header
- *         name: X-Numero-Tarjeta
+ *       - name: x_numero_tarjeta
+ *         in: header
  *         required: true
  *         schema:
  *           type: string
- *           example: "TARJ-4567890123"
+ *         example: TARJ-4567890123
  *     responses:
  *       200:
- *         description: Lista de movimientos de tarjeta
+ *         description: Lista de movimientos
  *         content:
  *           application/json:
  *             example:
@@ -125,11 +120,11 @@ router.get('/corriente',
  *                 tipo: "DEBITO"
  *                 referencia: "COMP-003..."
  */
-router.get('/tarjetas', 
-  validateHeaders(['x-numero-tarjeta']),
+router.get("/tarjetas", 
+  validateHeaders(["x_numero_tarjeta"]),
   async (req, res, next) => {
     try {
-      const numeroTarjeta = req.headers['x-numero-tarjeta'];
+      const numeroTarjeta = req.headers["x_numero_tarjeta"];
       const movimientos = await MovimientosService.getMovimientosTarjeta(numeroTarjeta);
       res.json(movimientos);
     } catch (error) {

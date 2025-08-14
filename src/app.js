@@ -1,15 +1,15 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const { swaggerUi, swaggerSpec } = require('./swagger');
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const { swaggerUi, swaggerSpec } = require("./swagger");
+app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/api/movimientos', require('./controllers/movimientosController'));
-app.use('/api/movimientos', require('./controllers/detallesController'));
+app.use("/api/movimientos", require("./controllers/movimientosController"));
+app.use("/api/movimientos", require("./controllers/detallesController"));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
