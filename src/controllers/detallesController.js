@@ -59,20 +59,11 @@ const handleServiceError = (error, res) => {
  *               establecimiento: "Banco Principal"
  *               saldoPosterior: 1000
  */
-
-<<<<<<< HEAD
 router.get("/ahorro/detalle", 
   validateHeaders(["x_numero_cuenta", "x_movimiento_id"]),
   async (req, res, next) => {
     try {
       const { "x_numero_cuenta": numeroCuenta, "x_movimiento_id": movimientoId } = req.headers;
-=======
-router.get('/ahorro/detalle', 
-  validateHeaders(['x_numero_cuenta', 'x_movimiento_id']),
-  async (req, res, next) => {
-    try {
-      const { 'x_numero_cuenta': numeroCuenta, 'x_movimiento_id': movimientoId } = req.headers;
->>>>>>> e0d8c87edc536faf0af05f7fcce1976aba480805
       const detalle = await DetallesService.getDetalleAhorro(numeroCuenta, movimientoId);
       res.json(detalle);
     } catch (error) {
@@ -115,19 +106,11 @@ router.get('/ahorro/detalle',
  *               establecimiento: "Compañía de Agua"
  *               saldoPosterior: 849.5
  */
-<<<<<<< HEAD
 router.get("/corriente/detalle", 
   validateHeaders(["x_numero_cuenta", "x_movimiento_id"]),
   async (req, res, next) => {
     try {
       const { "x_numero_cuenta": numeroCuenta, "x_movimiento_id": movimientoId } = req.headers;
-=======
-router.get('/corriente/detalle', 
-  validateHeaders(['x_numero_cuenta', 'x_movimiento_id']),
-  async (req, res, next) => {
-    try {
-      const { 'x_numero_cuenta': numeroCuenta, 'x_movimiento_id': movimientoId } = req.headers;
->>>>>>> e0d8c87edc536faf0af05f7fcce1976aba480805
       const detalle = await DetallesService.getDetalleCorriente(numeroCuenta, movimientoId);
       res.json(detalle);
     } catch (error) {
@@ -170,19 +153,11 @@ router.get('/corriente/detalle',
  *               establecimiento: "Supermercado XYZ"
  *               saldoPosterior: 954.01
  */
-<<<<<<< HEAD
 router.get("/tarjetas/detalle", 
   validateHeaders(["x_numero_tarjeta", "x_movimiento_id"]),
   async (req, res, next) => {
     try {
       const { "x_numero_tarjeta": numeroTarjeta, "x_movimiento_id": movimientoId } = req.headers;
-=======
-router.get('/tarjetas/detalle', 
-  validateHeaders(['x_numero_tarjeta', 'x_movimiento_id']),
-  async (req, res, next) => {
-    try {
-      const { 'x_numero_tarjeta': numeroTarjeta, 'x_movimiento_id': movimientoId } = req.headers;
->>>>>>> e0d8c87edc536faf0af05f7fcce1976aba480805
       const detalle = await DetallesService.getDetalleTarjeta(numeroTarjeta, movimientoId);
       res.json(detalle);
     } catch (error) {
