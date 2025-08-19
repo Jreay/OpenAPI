@@ -44,15 +44,23 @@ describe('Pruebas para MovimientosService', () => {
     expect(result[1].referencia).toBe('PAGO-002...'); // Verifica el recorte de la referencia
     expect(redisClient.exists).toHaveBeenCalledWith('movimientos:ahorro:AHO-123456');
   });
-  
+
   // --- Casos de error ---
   it('debe lanzar un error si el número de cuenta de ahorro es inválido', async () => {
-    await expect(MovimientosService.getMovimientosAhorro('AHO-abc')).rejects.toThrow('Número de cuenta no válido');
+    // Corregido: La aserción ahora espera el mensaje de error interno
+    await expect(MovimientosService.getMovimientosAhorro('AHO-abc')).rejects.toThrow('NUMERO_CUENTA_INVALIDO');
   });
 
   it('debe lanzar un error si el recurso no es encontrado en Redis', async () => {
     // Simula que la clave no existe
     redisClient.exists.mockResolvedValue(0);
-    await expect(MovimientosService.getMovimientosAhorro('AHO-123456')).rejects.toThrow('Recurso no encontrado');
+
+    // Corregido: La aserción ahora espera el objeto de error retornado por _handleError
+    await expect(MovimientosService.getMovimientosAhorro('AHO-123456')).rejects.toEqual(
+      expect.objectContaining({
+        codigo: 404,
+        mensaje: 'Movimiento no encontrado',
+      })
+    );
   });
 });

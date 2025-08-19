@@ -8,7 +8,7 @@ class MovimientosService {
       // Verificar existencia de la lista
       const exists = await redisClient.exists(key);
       if (!exists) {
-        throw new Error("RECURSO_NO_ENCONTRADO");
+        throw new Error("MOVIMIENTO_NO_ENCONTRADO");
       }
 
       // Obtener IDs de movimientos con paginación implícita
@@ -63,11 +63,10 @@ class MovimientosService {
   }
 
   static _handleError(error) {
-    // Mapeo de errores técnicos a errores de dominio
     const errorMap = {
-      RECURSO_NO_ENCONTRADO: {
+      MOVIMIENTO_NO_ENCONTRADO: {
         codigo: 404,
-        mensaje: "Recurso no encontrado"
+        mensaje: "Movimiento no encontrado"
       },
       NUMERO_CUENTA_INVALIDO: {
         codigo: 400,
