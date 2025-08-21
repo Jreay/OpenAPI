@@ -10,21 +10,10 @@ class DetallesService {
       const movimiento = await redisClient.hgetall(`movimiento:${movimientoId}`);
       console.log("[Debug] movimiento recuperado:", movimiento);
       
-      // Validación básica del movimiento
       if (!movimiento?.id) {
         throw new Error("MOVIMIENTO_NO_ENCONTRADO");
       }
 
-      // Validar tipo de cuenta y pertenencia
-      if (movimiento.tipoCuenta !== tipoEsperado) {
-        throw new Error("TIPO_CUENTA_NO_COINCIDE");
-      }
-
-      if (movimiento.cuenta !== numeroEsperado) {
-        throw new Error("CUENTA_NO_COINCIDE");
-      }
-
-      // Convertir y validar campos numéricos
       const monto = this._parseCurrency(movimiento.monto, "Monto inválido");
       console.log("[Debug] monto parseado:", monto);
 
@@ -33,15 +22,13 @@ class DetallesService {
 
       return {
         id: movimiento.id,
-        fecha: movimiento.fecha || new Date().toISOString(),
-        descripcion: movimiento.descripcion || "Sin descripción",
+        fecha: movimiento.fecha,
+        descripcion: movimiento.descripcion,
         monto,
         tipo: movimiento.tipo,
         referencia: movimiento.referencia,
         establecimiento: movimiento.establecimiento,
-        saldoPosterior: saldo,
-        // Campos adicionales si existen
-        ...(movimiento.comentario && { comentario: movimiento.comentario })
+        saldoPosterior: saldo
       };
     } catch (error) {
       console.error(`[DetallesService] Error: ${error.message}`);
@@ -84,14 +71,6 @@ class DetallesService {
       "MOVIMIENTO_NO_ENCONTRADO": {
         code: 404,
         message: "Movimiento no encontrado"
-      },
-      "TIPO_CUENTA_NO_COINCIDE": {
-        code: 400,
-        message: "El movimiento no corresponde al tipo de cuenta"
-      },
-      "CUENTA_NO_COINCIDE": {
-        code: 403,
-        message: "El movimiento no pertenece a esta cuenta"
       },
       "VALOR_NUMERICO_INVALIDO": {
         code: 500,

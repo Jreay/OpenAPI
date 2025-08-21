@@ -37,27 +37,6 @@ describe("Pruebas con mock para MovimientosController", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockRespuesta);
     expect(MovimientosService.getMovimientosAhorro).toHaveBeenCalledWith(numeroCuenta);
-
-    const numeroCuentaCorriente = "COR-654321";
-    const pathCorriente = "/api/movimientos/corriente";
-    const mockRespuestaCorriente = [
-      {
-        id: "mov-456",
-        fecha: "2023-05-16T14:45:00Z",
-        descripcion: "Pago de servicios",
-        monto: 150.5,
-        tipo: "DEBITO",
-        referencia: "PAGO-002..."
-      }
-    ];
-
-    MovimientosService.getMovimientosAhorro.mockResolvedValue(mockRespuestaCorriente);
-
-    const responseCorriente = await request(app).get(pathCorriente).set(campoCuenta, numeroCuentaCorriente);
-
-    expect(responseCorriente.statusCode).toBe(200);
-    expect(responseCorriente.body).toEqual(mockRespuestaCorriente);
-    expect(MovimientosService.getMovimientosAhorro).toHaveBeenCalledWith(numeroCuentaCorriente);
   });
 
   it("GET /api/movimientos/corriente debe retornar datos mockeados", async () => {
@@ -81,7 +60,7 @@ describe("Pruebas con mock para MovimientosController", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockRespuesta);
-    expect(MovimientosService.getMovimientosAhorro).toHaveBeenCalledWith(numeroCuenta);
+    expect(MovimientosService.getMovimientosCorriente).toHaveBeenCalledWith(numeroCuenta);
   });
 
   it("GET /api/movimientos/tarjetas debe retornar datos mockeados", async () => {
@@ -105,7 +84,7 @@ describe("Pruebas con mock para MovimientosController", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual(mockRespuesta);
-    expect(MovimientosService.getMovimientosAhorro).toHaveBeenCalledWith(numeroTarjeta);
+    expect(MovimientosService.getMovimientosTarjeta).toHaveBeenCalledWith(numeroTarjeta);
   });
 
   it("GET /api/movimientos/ahorro debe manejar errores del servicio", async () => {

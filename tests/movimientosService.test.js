@@ -1,7 +1,6 @@
 const MovimientosService = require('../src/services/movimientosService');
 const redisClient = require('../src/models/redisClient');
 
-// Simular el cliente de Redis para aislar la prueba
 jest.mock('../src/models/redisClient');
 
 describe('Pruebas para MovimientosService', () => {
@@ -9,7 +8,6 @@ describe('Pruebas para MovimientosService', () => {
     jest.clearAllMocks();
   });
 
-  // --- Caso de éxito ---
   it('debe retornar una lista de movimientos para una cuenta de ahorro', async () => {
     // 1. Simular la existencia de la clave y los IDs de movimientos
     redisClient.exists.mockResolvedValue(1);
@@ -34,10 +32,8 @@ describe('Pruebas para MovimientosService', () => {
         referencia: 'PAGO-002-COMPLETA'
       });
 
-    // 3. Llamar a la función del servicio
     const result = await MovimientosService.getMovimientosAhorro('AHO-123456');
 
-    // 4. Verificar el resultado
     expect(result).toHaveLength(2);
     expect(result[0].monto).toBe(1000);
     expect(result[1].monto).toBe(150.5);

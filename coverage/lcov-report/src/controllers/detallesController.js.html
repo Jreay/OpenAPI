@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.96% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/27</span>
+                <span class='fraction'>27/27</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -238,15 +238,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -342,12 +342,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -389,12 +389,12 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -509,13 +509,13 @@ router.get("/ahorro/detalle",
  */
 router.get("/corriente/detalle", 
   validateHeaders(["x_numero_cuenta", "x_movimiento_id"]),
-<span class="fstat-no" title="function not covered" >  as</span>ync (req, res, next) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const { "x_numero_cuenta": numeroCuenta, "x_movimiento_id": movimientoId } = <span class="cstat-no" title="statement not covered" >req.headers;</span>
-      const detalle = <span class="cstat-no" title="statement not covered" >await DetallesService.getDetalleCorriente(numeroCuenta, movimientoId);</span>
-<span class="cstat-no" title="statement not covered" >      res.json(detalle);</span>
+  async (req, res, next) =&gt; {
+    try {
+      const { "x_numero_cuenta": numeroCuenta, "x_movimiento_id": movimientoId } = req.headers;
+      const detalle = await DetallesService.getDetalleCorriente(numeroCuenta, movimientoId);
+      res.json(detalle);
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      handleServiceError(error, res);</span>
+      handleServiceError(error, res);
     }
   }
 );
@@ -556,13 +556,13 @@ router.get("/corriente/detalle",
  */
 router.get("/tarjetas/detalle", 
   validateHeaders(["x_numero_tarjeta", "x_movimiento_id"]),
-<span class="fstat-no" title="function not covered" >  as</span>ync (req, res, next) =&gt; {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-      const { "x_numero_tarjeta": numeroTarjeta, "x_movimiento_id": movimientoId } = <span class="cstat-no" title="statement not covered" >req.headers;</span>
-      const detalle = <span class="cstat-no" title="statement not covered" >await DetallesService.getDetalleTarjeta(numeroTarjeta, movimientoId);</span>
-<span class="cstat-no" title="statement not covered" >      res.json(detalle);</span>
+  async (req, res, next) =&gt; {
+    try {
+      const { "x_numero_tarjeta": numeroTarjeta, "x_movimiento_id": movimientoId } = req.headers;
+      const detalle = await DetallesService.getDetalleTarjeta(numeroTarjeta, movimientoId);
+      res.json(detalle);
     } catch (error) {
-<span class="cstat-no" title="statement not covered" >      handleServiceError(error, res);</span>
+      handleServiceError(error, res);
     }
   }
 );
@@ -574,7 +574,7 @@ module.exports = router;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-08-20T07:03:30.003Z
+                at 2025-08-21T03:48:45.527Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
