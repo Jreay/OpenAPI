@@ -16,7 +16,7 @@ const validateHeaders = (requiredHeaders) => {
       return res.status(400).json({
         codigo: "400",
         mensaje: "Headers requeridos faltantes",
-        detalles: `Faltan los siguientes headers: ${missingHeaders.join(', ')}`,
+        detalles: `Faltan los siguientes headers: ${missingHeaders.join(", ")}`,
         timestamp: new Date().toISOString()
       });
     }
