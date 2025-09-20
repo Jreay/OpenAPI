@@ -1,6 +1,20 @@
-# Node modules
+# Dependencias y paquetes
 node_modules/
 
-# Entorno
+# Logs
+*.log
+npm-debug.log*
+
+# Archivos de build y reportes
+coverage/
+dist/
+build/
+
+# Archivos de entorno y secretos
 .env
 .env.*
+
+# Archivos de Sistema Operativo y Editores
+.DS_Store
+.vscode/
+.idea/
