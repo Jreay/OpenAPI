@@ -1,0 +1,6 @@
+projectKey=open-api
+serverUrl=http://sonarqube:9000
+serverVersion=25.9.0.112764
+dashboardUrl=http://sonarqube:9000/dashboard?id=open-api
+ceTaskId=7d6b6c6c-107a-4a9c-a85d-0b5df53d8673
+ceTaskUrl=http://sonarqube:9000/api/ce/task?id=7d6b6c6c-107a-4a9c-a85d-0b5df53d8673
