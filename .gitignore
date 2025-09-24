@@ -9,6 +9,7 @@ npm-debug.log*
 coverage/
 dist/
 build/
+.scannerwork/ 
 
 # Archivos de entorno y secretos
 .env
